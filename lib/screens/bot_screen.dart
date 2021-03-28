@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perlemir_mobile/screens/add_bot_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/bots.dart';
@@ -13,7 +14,9 @@ class BotScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(AddBotScreen.routeName);
+        },
       ),
       body: Consumer<Bots>(
         child: const Text("hello"),

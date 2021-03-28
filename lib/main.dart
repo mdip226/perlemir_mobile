@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perlemir_mobile/providers/bots.dart';
+import 'package:perlemir_mobile/screens/add_bot_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:perlemir_mobile/screens/bot_screen.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.indigo,
         ),
         home: BotScreen(),
+        routes: {AddBotScreen.routeName: (ctx) => AddBotScreen()},
       ),
     );
   }
