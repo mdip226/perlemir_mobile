@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:perlemir_mobile/providers/bitcoin_price.dart';
 import 'package:perlemir_mobile/providers/bots.dart';
 import 'package:perlemir_mobile/screens/add_bot_screen.dart';
+import 'package:perlemir_mobile/screens/price_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:perlemir_mobile/screens/bot_screen.dart';
 
@@ -12,15 +14,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => Bots(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => Bots(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => BitcoinPrice(),
+        )
+      ],
       child: MaterialApp(
         title: 'Perlemir',
         theme: ThemeData(
           primarySwatch: Colors.indigo,
         ),
         home: BotScreen(),
-        routes: {AddBotScreen.routeName: (ctx) => AddBotScreen()},
+        routes: {
+          AddBotScreen.routeName: (ctx) => AddBotScreen(),
+          BotScreen.routeName: (ctx) => BotScreen(),
+          PriceScreen.routeName: (ctx) => PriceScreen(),
+        },
       ),
     );
   }

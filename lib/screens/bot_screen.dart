@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:perlemir_mobile/screens/add_bot_screen.dart';
+import 'package:perlemir_mobile/widgets/app_drawer.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/bots.dart';
 import '../widgets/bot_card.dart';
 
 class BotScreen extends StatelessWidget {
+  static const routeName = '/bot-screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +31,7 @@ class BotScreen extends StatelessWidget {
                   return BotCard(bots.dcabots[i]);
                 }),
       ),
+      drawer: AppDrawer(),
     );
   }
 }
