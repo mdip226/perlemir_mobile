@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perlemir_mobile/screens/bot_screen.dart';
 import 'package:perlemir_mobile/screens/price_screen.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -19,7 +20,16 @@ class AppDrawer extends StatelessWidget {
               Navigator.of(context).pop();
               Navigator.of(context).pushNamed(PriceScreen.routeName);
             },
-          )
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.bolt),
+            title: Text("Bots"),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed(BotScreen.routeName);
+            },
+          ),
         ],
       ),
     );

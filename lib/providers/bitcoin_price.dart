@@ -12,23 +12,37 @@ class PriceDatum {
 
 class BitcoinPrice with ChangeNotifier {
   List<PriceDatum> _prices = [];
+  String _timespan = "30";
 
   List<PriceDatum> get getPrices {
     return [..._prices];
   }
 
-  void fetchAndSetPrices() async {
+  String get timespan {
+    return _timespan;
+  }
+
+  Future<void> fetchAndSetPrices(String timespan) async {
     try {
       //you can provide start and end parameters here
-      final url =
-          Uri.parse('https://api.coindesk.com/v1/bpi/historical/close.json');
+      final url = Uri.parse(
+          'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=$timespan');
       final response = await http.get(url);
+      // print(json.decode(response.body));
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      final extractedBpi = extractedData["bpi"] as Map<String, dynamic>;
-      extractedBpi.forEach((key, value) {
-        _prices.add(PriceDatum(DateTime.parse(key), value));
+      print(extractedData);
+      final extractedBpi = extractedData["prices"] as List<dynamic>;
+      List<PriceDatum> remotePrices = [];
+      extractedBpi.forEach((datum) {
+        print(DateTime.fromMillisecondsSinceEpoch((datum[0])).toString());
+        // print(datum[1]);
+        remotePrices.add(PriceDatum(
+            DateTime.fromMillisecondsSinceEpoch(datum[0]), datum[1]));
       });
+      _prices = remotePrices;
+      _timespan = timespan;
       print(_prices);
+      notifyListeners();
     } catch (e) {
       print(e);
     }

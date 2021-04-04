@@ -13,13 +13,14 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   var _isInit = true;
-
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      Provider.of<BitcoinPrice>(context).fetchAndSetPrices();
-      _isInit = false;
+      Provider.of<BitcoinPrice>(context)
+          .fetchAndSetPrices(Provider.of<BitcoinPrice>(context).timespan)
+          .then((value) => _isInit = false);
     }
+
     super.didChangeDependencies();
   }
 
@@ -31,16 +32,87 @@ class _PriceScreenState extends State<PriceScreen> {
         title: Text("Live Pricing"),
       ),
       drawer: AppDrawer(),
-      body: Center(
-        child: SfCartesianChart(
-            primaryXAxis: DateTimeAxis(),
-            primaryYAxis: NumericAxis(),
-            series: <ChartSeries>[
-              LineSeries<PriceDatum, DateTime>(
+      body: Column(
+        children: [
+          ButtonBar(
+            alignment: MainAxisAlignment.spaceAround,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Provider.of<BitcoinPrice>(context, listen: false)
+                      .fetchAndSetPrices("1");
+                },
+                child: Text(
+                  "1D",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Provider.of<BitcoinPrice>(context, listen: false)
+                      .fetchAndSetPrices("30");
+                },
+                child: Text(
+                  "30D",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Provider.of<BitcoinPrice>(context, listen: false)
+                      .fetchAndSetPrices("90");
+                },
+                child: Text(
+                  "90D",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Provider.of<BitcoinPrice>(context, listen: false)
+                      .fetchAndSetPrices("365");
+                },
+                child: Text(
+                  "1Y",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Provider.of<BitcoinPrice>(context, listen: false)
+                      .fetchAndSetPrices("${365 * 2}");
+                },
+                child: Text(
+                  "2Y",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Provider.of<BitcoinPrice>(context, listen: false)
+                      .fetchAndSetPrices("max");
+                },
+                child: Text(
+                  "MAX",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+            ],
+          ),
+          Container(
+            child: SfCartesianChart(
+              primaryXAxis: DateTimeAxis(),
+              primaryYAxis: NumericAxis(),
+              series: <ChartSeries>[
+                LineSeries<PriceDatum, DateTime>(
                   dataSource: _data,
                   xValueMapper: (datum, _) => datum.date,
-                  yValueMapper: (datum, _) => datum.price),
-            ]),
+                  yValueMapper: (datum, _) => datum.price,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
