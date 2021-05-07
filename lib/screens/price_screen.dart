@@ -40,40 +40,10 @@ class _PriceScreenState extends State<PriceScreen> {
               GestureDetector(
                 onTap: () {
                   Provider.of<BitcoinPrice>(context, listen: false)
-                      .fetchAndSetPrices("1");
+                      .fetchAndSetPrices("max");
                 },
                 child: Text(
-                  "1D",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Provider.of<BitcoinPrice>(context, listen: false)
-                      .fetchAndSetPrices("30");
-                },
-                child: Text(
-                  "30D",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Provider.of<BitcoinPrice>(context, listen: false)
-                      .fetchAndSetPrices("90");
-                },
-                child: Text(
-                  "90D",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Provider.of<BitcoinPrice>(context, listen: false)
-                      .fetchAndSetPrices("365");
-                },
-                child: Text(
-                  "1Y",
+                  "MAX",
                   style: TextStyle(fontSize: 18),
                 ),
               ),
@@ -90,10 +60,40 @@ class _PriceScreenState extends State<PriceScreen> {
               GestureDetector(
                 onTap: () {
                   Provider.of<BitcoinPrice>(context, listen: false)
-                      .fetchAndSetPrices("max");
+                      .fetchAndSetPrices("365");
                 },
                 child: Text(
-                  "MAX",
+                  "1Y",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Provider.of<BitcoinPrice>(context, listen: false)
+                      .fetchAndSetPrices("90");
+                },
+                child: Text(
+                  "90D",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Provider.of<BitcoinPrice>(context, listen: false)
+                      .fetchAndSetPrices("30");
+                },
+                child: Text(
+                  "30D",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Provider.of<BitcoinPrice>(context, listen: false)
+                      .fetchAndSetPrices("1");
+                },
+                child: Text(
+                  "1D",
                   style: TextStyle(fontSize: 18),
                 ),
               ),
