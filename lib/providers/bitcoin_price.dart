@@ -41,7 +41,7 @@ class BitcoinPrice with ChangeNotifier {
       });
       _prices = remotePrices;
       _timespan = timespan;
-      print(_prices);
+      // print(_prices);
       notifyListeners();
     } catch (e) {
       print(e);

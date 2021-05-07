@@ -27,6 +27,7 @@ class _PriceScreenState extends State<PriceScreen> {
   @override
   Widget build(BuildContext context) {
     final _data = Provider.of<BitcoinPrice>(context).getPrices;
+    final _span = Provider.of<BitcoinPrice>(context).timespan;
     return Scaffold(
       appBar: AppBar(
         title: Text("Live Pricing"),
@@ -35,6 +36,7 @@ class _PriceScreenState extends State<PriceScreen> {
       body: Column(
         children: [
           ButtonBar(
+            buttonPadding: EdgeInsets.symmetric(horizontal: 2),
             alignment: MainAxisAlignment.spaceAround,
             children: [
               GestureDetector(
@@ -42,9 +44,22 @@ class _PriceScreenState extends State<PriceScreen> {
                   Provider.of<BitcoinPrice>(context, listen: false)
                       .fetchAndSetPrices("max");
                 },
-                child: Text(
-                  "MAX",
-                  style: TextStyle(fontSize: 18),
+                child: Container(
+                  padding: EdgeInsets.all(3),
+                  decoration: _span == "max"
+                      ? BoxDecoration(
+                          border: Border.all(width: 1.7),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                        )
+                      : null,
+                  child: Text(
+                    "MAX",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
               ),
               GestureDetector(
@@ -52,9 +67,20 @@ class _PriceScreenState extends State<PriceScreen> {
                   Provider.of<BitcoinPrice>(context, listen: false)
                       .fetchAndSetPrices("${365 * 2}");
                 },
-                child: Text(
-                  "2Y",
-                  style: TextStyle(fontSize: 18),
+                child: Container(
+                  padding: EdgeInsets.all(3),
+                  decoration: _span == "${365 * 2}"
+                      ? BoxDecoration(
+                          border: Border.all(width: 1.7),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                        )
+                      : null,
+                  child: Text(
+                    "2Y",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ),
               GestureDetector(
@@ -62,9 +88,20 @@ class _PriceScreenState extends State<PriceScreen> {
                   Provider.of<BitcoinPrice>(context, listen: false)
                       .fetchAndSetPrices("365");
                 },
-                child: Text(
-                  "1Y",
-                  style: TextStyle(fontSize: 18),
+                child: Container(
+                  padding: EdgeInsets.all(3),
+                  decoration: _span == "365"
+                      ? BoxDecoration(
+                          border: Border.all(width: 1.7),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                        )
+                      : null,
+                  child: Text(
+                    "1Y",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ),
               GestureDetector(
@@ -72,9 +109,20 @@ class _PriceScreenState extends State<PriceScreen> {
                   Provider.of<BitcoinPrice>(context, listen: false)
                       .fetchAndSetPrices("90");
                 },
-                child: Text(
-                  "90D",
-                  style: TextStyle(fontSize: 18),
+                child: Container(
+                  padding: EdgeInsets.all(3),
+                  decoration: _span == "90"
+                      ? BoxDecoration(
+                          border: Border.all(width: 1.7),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                        )
+                      : null,
+                  child: Text(
+                    "90D",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ),
               GestureDetector(
@@ -82,9 +130,20 @@ class _PriceScreenState extends State<PriceScreen> {
                   Provider.of<BitcoinPrice>(context, listen: false)
                       .fetchAndSetPrices("30");
                 },
-                child: Text(
-                  "30D",
-                  style: TextStyle(fontSize: 18),
+                child: Container(
+                  padding: EdgeInsets.all(3),
+                  decoration: _span == "30"
+                      ? BoxDecoration(
+                          border: Border.all(width: 1.7),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                        )
+                      : null,
+                  child: Text(
+                    "30D",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ),
               GestureDetector(
@@ -92,9 +151,20 @@ class _PriceScreenState extends State<PriceScreen> {
                   Provider.of<BitcoinPrice>(context, listen: false)
                       .fetchAndSetPrices("1");
                 },
-                child: Text(
-                  "1D",
-                  style: TextStyle(fontSize: 18),
+                child: Container(
+                  padding: EdgeInsets.all(3),
+                  decoration: _span == "1"
+                      ? BoxDecoration(
+                          border: Border.all(width: 1.7),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                        )
+                      : null,
+                  child: Text(
+                    "1D",
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ),
             ],

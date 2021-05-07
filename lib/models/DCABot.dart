@@ -25,6 +25,7 @@ class DCABot {
     @required this.amount,
     @required this.currency,
   });
+
   String get freq {
     switch (frequency) {
       case Freq.perHour:
