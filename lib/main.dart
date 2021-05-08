@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:perlemir_mobile/providers/bitcoin_price.dart';
+import 'package:perlemir_mobile/providers/coin_price.dart';
 import 'package:perlemir_mobile/providers/bots.dart';
 import 'package:perlemir_mobile/screens/add_bot_screen.dart';
 import 'package:perlemir_mobile/screens/price_screen.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           create: (ctx) => Bots(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => BitcoinPrice(),
+          create: (ctx) => CoinPrice(),
         )
       ],
       child: MaterialApp(

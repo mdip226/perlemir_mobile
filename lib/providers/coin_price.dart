@@ -10,9 +10,10 @@ class PriceDatum {
   final double price;
 }
 
-class BitcoinPrice with ChangeNotifier {
+class CoinPrice with ChangeNotifier {
   List<PriceDatum> _prices = [];
   String _timespan = "30";
+  String _coin = "bitcoin";
 
   List<PriceDatum> get getPrices {
     return [..._prices];
@@ -22,11 +23,15 @@ class BitcoinPrice with ChangeNotifier {
     return _timespan;
   }
 
-  Future<void> fetchAndSetPrices(String timespan) async {
+  String get coin {
+    return _coin;
+  }
+
+  Future<void> fetchAndSetPrices(String timespan, String coin) async {
     try {
       //you can provide start and end parameters here
       final url = Uri.parse(
-          'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=$timespan');
+          'https://api.coingecko.com/api/v3/coins/$coin/market_chart?vs_currency=usd&days=$timespan');
       final response = await http.get(url);
       // print(json.decode(response.body));
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -41,6 +46,7 @@ class BitcoinPrice with ChangeNotifier {
       });
       _prices = remotePrices;
       _timespan = timespan;
+      _coin = coin;
       // print(_prices);
       notifyListeners();
     } catch (e) {
